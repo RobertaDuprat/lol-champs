@@ -22,8 +22,7 @@ export default function App() {
   const championsArray = Object.keys(championMap).map((key) => championMap[key]);
 
   return (
-    <div class="grid grid-cols-4 gap-4">
-    
+    <div class="grid grid-cols-8 gap-2">
       {championsArray.map((champion) => (
         <div key={champion.id} className="card">
           <div> 
