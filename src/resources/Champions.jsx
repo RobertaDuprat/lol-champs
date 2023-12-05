@@ -22,14 +22,8 @@ export default function App() {
   const championsArray = Object.keys(championMap).map((key) => championMap[key]);
 
   return (
-    <div>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-  {Array.from(Array(6)).map((_, index) => (
-    <Grid item xs={2} sm={4} md={4} key={index}>
-      <Item>xs=2</Item>
-    </Grid>
-  ))}
-</Grid>
+    <div class="grid grid-cols-4 gap-4">
+    
       {championsArray.map((champion) => (
         <div key={champion.id} className="card">
           <div> 
