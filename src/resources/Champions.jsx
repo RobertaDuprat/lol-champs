@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"; 
+import ChampionCard from '../components/ChampionCard';
 import './Champions.css';
+import { API_URL } from "../constants";
 
-const API_BASE = "https://ddragon.leagueoflegends.com/cdn/13.23.1"; 
-const API_URL = `${API_BASE}/data/en_US/champion.json`;
-
-export default function App() {
+export default function Champions() {
   const [championMap, setChampionMap] = useState({});
   const [filterText, setFilterText] = useState("");
 
@@ -29,7 +28,7 @@ export default function App() {
   return (
   
   <>
-    <div className="grid" class="bg-hextec-black min-h-screen">  
+    <div className="bg-hextec-black min-h-screen">  
    
     <input
       className="search"
@@ -40,13 +39,15 @@ export default function App() {
       class="border-2 border-cold-gray bg-cold-gray p-2 mt-5 ms-8 w-3/6" 
 
     />
-    <div class="grid grid-cols-11 gap-1 justify-items-center">
+    <select name="cars" id="cars">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+    <div className="grid grid-cols-11 gap-1 justify-items-center">
       {filteredChampions.map((champion) => (
-        <div key={champion.id} className="card">
-          <div> 
-          </div>
-          <img alt={champion.id} src={`${API_BASE}/img/champion/${champion.id}.png`} />
-        </div>
+        <ChampionCard id={champion.id} name={champion.name}/>
       ))}
     </div>
     </div>
