@@ -29,7 +29,7 @@ export default function App() {
   return (
   
   <>
-    <div className="grid" class="bg-hextec-black">  
+    <div className="grid" class="bg-hextec-black min-h-screen">  
    
     <input
       className="search"
@@ -37,10 +37,10 @@ export default function App() {
       type="text"
       onChange={handleFilterTextChange}
       value={filterText}
-      class="bg-cold-gray mt-5 ms-8 "
+      class="border-2 border-cold-gray bg-cold-gray p-2 mt-5 ms-8 w-3/6" 
 
     />
-    <div class="grid grid-cols-11 gap-1  bg-hextec-black grid justify-items-center">
+    <div class="grid grid-cols-11 gap-1 justify-items-center">
       {filteredChampions.map((champion) => (
         <div key={champion.id} className="card">
           <div> 
