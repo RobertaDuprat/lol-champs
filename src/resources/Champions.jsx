@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
+import './Champions.css';
 
 const API_BASE = "https://ddragon.leagueoflegends.com/cdn/13.23.1"; 
 const API_URL = `${API_BASE}/data/en_US/champion.json`;
 
 export default function App() {
   const [championMap, setChampionMap] = useState({});
+  const [filterText, setFilterText] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,10 +22,26 @@ export default function App() {
   }, []);
 
   const championsArray = Object.keys(championMap).map((key) => championMap[key]);
+  const filteredChampions = championsArray.filter((champion) => champion.name.toLowerCase().includes(filterText.toLowerCase()));
+  const handleFilterTextChange =  (event) => {setFilterText(event.target.value);
+  };
 
   return (
-    <div class="grid grid-cols-8 gap-2">
-      {championsArray.map((champion) => (
+  
+  <>
+    <div className="grid" class="bg-hextec-black">  
+   
+    <input
+      className="search"
+      placeholder=" Digite aqui"
+      type="text"
+      onChange={handleFilterTextChange}
+      value={filterText}
+      class="bg-cold-gray mt-5 ms-8 "
+
+    />
+    <div class="grid grid-cols-11 gap-1  bg-hextec-black grid justify-items-center">
+      {filteredChampions.map((champion) => (
         <div key={champion.id} className="card">
           <div> 
           </div>
@@ -31,5 +49,7 @@ export default function App() {
         </div>
       ))}
     </div>
+    </div>
+    </>
   );
 }

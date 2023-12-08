@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <div className='head'>
-        <div className="title">
+        <div className="title" >
           <h1>LoL Champs</h1>     
         </div>
         <div>

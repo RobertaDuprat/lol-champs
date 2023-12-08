@@ -2,8 +2,14 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}",],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'hextec-black': '#010A13',
+        'cold-gray': '#1E282D',
+      }
+    }
   },
+
   plugins: [],
 }
 
