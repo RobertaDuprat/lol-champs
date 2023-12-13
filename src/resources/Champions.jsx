@@ -39,13 +39,17 @@ export default function Champions() {
       class="border-2 border-cold-gray bg-cold-gray p-2 mt-5 ms-8 w-3/6" 
 
     />
-    <select name="cars" id="cars">
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
+    <select name="roles" id="roles" class="border-2 border-cold-gray bg-cold-gray p-2 mt-5 ms-8 ">
+      <option value="mago">Mago</option>
+      <option value="assassino">Assassino</option>
+      <option value="lutador">Lutador</option>
+      <option value="atirador">Atirador</option>
+      <option value="suporte">Suporte</option>
+      <option value="tanque">Tanque</option>
+
+
     </select>
-    <div className="grid grid-cols-11 gap-1 justify-items-center">
+    <div className="grid grid-cols-11 gap-1 justify-items-center ">
       {filteredChampions.map((champion) => (
         <ChampionCard id={champion.id} name={champion.name}/>
       ))}
