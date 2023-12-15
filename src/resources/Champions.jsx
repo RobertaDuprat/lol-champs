@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import ChampionCard from '../components/ChampionCard';
 import './Champions.css';
 import { API_URL } from "../constants";
@@ -6,7 +6,7 @@ import { API_URL } from "../constants";
 export default function Champions() {
   const [championMap, setChampionMap] = useState({});
   const [filterText, setFilterText] = useState("");
-  //const [filter]
+  const [filterTags, setFilterTags] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,40 +22,54 @@ export default function Champions() {
   }, []);
 
   const championsArray = Object.keys(championMap).map((key) => championMap[key]);
-  const filteredChampions = championsArray.filter((champion) => champion.name.toLowerCase().includes(filterText.toLowerCase()));
-  const handleFilterTextChange =  (event) => {setFilterText(event.target.value);
+
+  const filteredChampions = championsArray.filter((champion) => {
+    const textMatch = champion.name.toLowerCase().includes(filterText.toLowerCase());
+    const tagMatch = filterTags === "" || champion.tags.includes(filterTags);
+    
+    return textMatch && tagMatch;
+  });
+
+  const handleFilterTextChange = (event) => {
+    setFilterText(event.target.value);
+  };
+
+  const handleFilterTagsChange = (event) => {
+    setFilterTags(event.target.value);
   };
 
   return (
-  
-  <>
-    <div className="bg-hextec-black min-h-screen">  
-   
-    <input
-      className="search"
-      placeholder=" Digite aqui"
-      type="text"
-      onChange={handleFilterTextChange}
-      value={filterText}
-      class="border-2 border-cold-gray bg-cold-gray p-2 mt-5 ms-8 w-3/6" 
-
-    />
-    <select name="roles" id="roles" class="border-2 border-cold-gray bg-cold-gray p-2 mt-5 ms-8 ">
-      <option value="mago">Mago</option>
-      <option value="assassino">Assassino</option>
-      <option value="lutador">Lutador</option>
-      <option value="atirador">Atirador</option>
-      <option value="suporte">Suporte</option>
-      <option value="tanque">Tanque</option>
-
-
-    </select>
-    <div className="grid grid-cols-11 gap-1 justify-items-center ">
-      {filteredChampions.map((champion) => (
-        <ChampionCard id={champion.id} name={champion.name}/>
-      ))}
-    </div>
-    </div>
+    <>
+      <div className="bg-hextec-black min-h-screen">
+        <input
+          className="search"
+          placeholder="Digite aqui"
+          type="text"
+          onChange={handleFilterTextChange}
+          value={filterText}
+          class="border-2 border-cold-gray bg-cold-gray p-2 mt-5 ms-8 w-3/6"
+        />
+        <select
+          name="tags"
+          id="tags"
+          class="border-2 border-cold-gray bg-cold-gray p-2 mt-5 ms-8 "
+          value={filterTags}
+          onChange={handleFilterTagsChange}
+        >
+          <option value="">Todos</option>
+          <option value="Mage">Mago</option>
+          <option value="Assassin">Assassino</option>
+          <option value="Fighter">Lutador</option>
+          <option value="Marksman">Atirador</option>
+          <option value="Support">Suporte</option>
+          <option value="Tank">Tanque</option>
+        </select>
+        <div className="grid grid-cols-11 gap-1 justify-items-center ">
+          {filteredChampions.map((champion) => (
+            <ChampionCard key={champion.id} id={champion.id} name={champion.name} />
+          ))}
+        </div>
+      </div>
     </>
   );
 }
