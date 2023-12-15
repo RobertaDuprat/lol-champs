@@ -6,6 +6,7 @@ import { API_URL } from "../constants";
 export default function Champions() {
   const [championMap, setChampionMap] = useState({});
   const [filterText, setFilterText] = useState("");
+  //const [filter]
 
   useEffect(() => {
     const fetchData = async () => {
