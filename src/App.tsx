@@ -10,7 +10,7 @@ const routes = [
   // Home page:
   {
     path: "/",
-    element: (
+    element: ( // o componente que será renderizado. Nesse caso seria interessante mover isso para um arquivo dentro de src/pages
       <>
         <div className="head">
           <div className="title">
@@ -28,8 +28,8 @@ const routes = [
   },
   // página do champ:
   {
-    path: "/champions/:championId",
-    element: <ChampionPage />,
+    path: "/champions/:championId", // Ex: /champions/Annie (Annie é o championId). Dentro de componentes, o parâmetro da URL é acessado por useParams().
+    element: <ChampionPage />, // o componente que será renderizado
   },
 ];
 
