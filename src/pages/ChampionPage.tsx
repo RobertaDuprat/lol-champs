@@ -21,13 +21,15 @@ export default function ChampionPage({}: Props) {
       </div>
     </div>
       <Link className="text-blue-500 hover:text-blue-700" to={`/`}>
-      
+      Back
       </Link>
-      <h1 className="text-4xl">
-      
+      <h1 className="pl-5 ">
+      <img alt={championId} src={`${API_BASE}/img/champion/${championId}.png`} />
+
       </h1>
-      
-      Showing champion: {championId}
+      <div className="pl-8">
+      {championId}
+      </div>
     </div>
   );
 }
