@@ -13,7 +13,7 @@ function ChampionCard(props: Props) {
   
   return (
     <div key={id} className="border-2 border-cold-gray bg-cold-gray">
-      <Link to="/champions/:championId">
+      <Link to={`/champions/${id}`}>
       <div>{name}</div>
       <img alt={id} src={`${API_BASE}/img/champion/${id}.png`} />
       </Link>
