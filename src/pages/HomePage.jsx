@@ -1,5 +1,6 @@
 import React from "react";
 import Champions from "../resources/Champions.jsx";
+import { API_BASE } from "../constants";
 
 const HomePage = () => (
   <>
@@ -8,7 +9,7 @@ const HomePage = () => (
         <h1>LoL Champs</h1>
       </div>
       <div>
-        <img src="favicon.png" className="icone" alt="Ícone" />
+        <img src="../favicon.png" className="icone" alt="Ícone" />
       </div>
     </div>
     <div>

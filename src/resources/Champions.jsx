@@ -40,6 +40,7 @@ export default function Champions() {
 
   return (
     <>
+      
       <div className="bg-hextec-black min-h-screen">
         <input
           className="search"
