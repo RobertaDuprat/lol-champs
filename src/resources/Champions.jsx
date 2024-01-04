@@ -65,7 +65,8 @@ export default function Champions() {
           <option value="Support">Suporte</option>
           <option value="Tank">Tanque</option>
         </select>
-        <div className="grid grid-cols-11 gap-1 justify-items-center ">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-12 gap-1 justify-items-center">
+        {/* <div className="grid grid-flow-col auto-cols-max gap-1 justify-items-center"> */}
           {filteredChampions.map((champion) => (
             <ChampionCard key={champion.id} id={champion.id} name={champion.name} />
           ))}
