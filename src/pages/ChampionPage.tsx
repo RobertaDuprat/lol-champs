@@ -49,7 +49,7 @@ export default function ChampionPage({}: Props) {
         </div>
       </div>
       <Link className="text-blue-500 hover:text-blue-700" to={`/`}>
-        Back
+        Back to home
       </Link>
       <h1 className="pl-5 ">
         <img
