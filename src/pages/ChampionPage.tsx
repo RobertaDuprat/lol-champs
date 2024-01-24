@@ -58,6 +58,7 @@ export default function ChampionPage({}: Props) {
         />
       </h1>
       <div className="pl-8">{championId}</div>
+      <div>{champion.title}</div>
     </div>
   );
 }
