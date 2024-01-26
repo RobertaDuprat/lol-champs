@@ -3,10 +3,21 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import { API_BASE, CHAMPION_API_URL } from "../constants";
 
 type Props = {};
+type Champion = {
+  title: string;
+  lore: string;
+  skins: Skins[];
+}
+type Skins = {
+  id: string;
+  num: number;
+  name: string;
+  chromas: boolean;
+}
 
-export default function ChampionPage({}: Props) {
+export default function ChampionPage({ }: Props) {
   const { championId } = useParams<{ championId: string }>(); // pegando o parâmetro da URL
-  const [champion, setChampion] = useState();
+  const [champion, setChampion] = useState<Champion | undefined>();
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -15,9 +26,10 @@ export default function ChampionPage({}: Props) {
       try {
         const response = await fetch(`${CHAMPION_API_URL}${championId}.json`);
         const data = await response.json();
-      if (championId && data.data[championId]){
-        setChampion(data.data[championId]);}
-       
+        if (championId && data.data[championId]) {
+          setChampion(data.data[championId]);
+        }
+
       } catch (error) {
         console.error("Erro ao buscar dados da API:", error);
         setError(true);
@@ -46,29 +58,31 @@ export default function ChampionPage({}: Props) {
         <div className="title">
           <h1>LoL Champs</h1>
         </div>
-        <div>
+        <div className="flex items-center">
           <img src="../favicon.png" className="icone" alt="Ícone" />
         </div>
       </div>
-      <Link className="text-blue-500 hover:text-blue-700" to={`/`}>
-        Back to home
-      </Link>
-      <div className="justify-center ">
       <div className="flex items-center">
-        <img
-          className="p-8"
-          alt={championId}
-          src={`${API_BASE}/img/champion/${championId}.png`}
-        />
-      
-      
-      <div className="text-center p-10 bg-cold-gray rounded-md my-2 w-1/2 h-30 ">{champion.lore}</div>
+        <Link className="text-blue-500 hover:text-blue-700" to={`/`}>
+          Back to home
+        </Link>
+        <div className="justify-center ">
+          <div className="flex items-center">
+            <img
+              className="p-8"
+              alt={championId}
+              src={`${API_BASE}/img/champion/${championId}.png`}
+            />
+
+
+            <div className="text-center p-10 bg-cold-gray rounded-md my-2 w-1/2 h-30 ">{champion?.lore}</div>
+          </div>
+          <div className="pl-8 text-center  h-5 w-40 font-bold">{championId}</div>
+          <div className="pl-8">{champion?.title}</div>
+
+          <div></div>
+        </div>
       </div>
-      <div className="pl-8 text-center  h-5 w-40 font-bold">{championId}</div>
-      <div className="pl-8">{champion.title}</div>
-     
-      <div></div>
-    </div>
     </div>
   );
 }
