@@ -7,15 +7,15 @@ type Champion = {
   title: string;
   lore: string;
   skins: Skins[];
-}
+};
 type Skins = {
   id: string;
   num: number;
   name: string;
   chromas: boolean;
-}
+};
 
-export default function ChampionPage({ }: Props) {
+export default function ChampionPage({}: Props) {
   const { championId } = useParams<{ championId: string }>(); // pegando o parâmetro da URL
   const [champion, setChampion] = useState<Champion | undefined>();
   const [error, setError] = useState<boolean>(false);
@@ -29,7 +29,6 @@ export default function ChampionPage({ }: Props) {
         if (championId && data.data[championId]) {
           setChampion(data.data[championId]);
         }
-
       } catch (error) {
         console.error("Erro ao buscar dados da API:", error);
         setError(true);
@@ -40,7 +39,7 @@ export default function ChampionPage({ }: Props) {
     fetchData();
   }, [championId]);
 
-  console.log('dados do campeao desta pagina', champion);
+  console.log("dados do campeao desta pagina", champion);
 
   if (error) {
     return <Navigate to="/not-found" replace />;
@@ -62,25 +61,19 @@ export default function ChampionPage({ }: Props) {
           <img src="../favicon.png" className="icone" alt="Ícone" />
         </div>
       </div>
-      <div className="flex items-center">
-        <Link className="text-blue-500 hover:text-blue-700" to={`/`}>
-          Back to home
-        </Link>
-        <div className="justify-center ">
-          <div className="flex items-center">
-            <img
-              className="p-8"
-              alt={championId}
-              src={`${API_BASE}/img/champion/${championId}.png`}
-            />
-
-
-            <div className="text-center p-10 bg-cold-gray rounded-md my-2 w-1/2 h-30 ">{champion?.lore}</div>
-          </div>
-          <div className="pl-8 text-center  h-5 w-40 font-bold">{championId}</div>
-          <div className="pl-8">{champion?.title}</div>
-
-          <div></div>
+      <Link className="text-blue-500 hover:text-blue-700" to={`/`}>
+        Back to home
+      </Link>
+      <div className="flex flex-col items-center">
+        <img
+          className="p-8"
+          alt={championId}
+          src={`${API_BASE}/img/champion/${championId}.png`}
+        />
+        <div className="text-center  h-5 w-40 font-bold">{championId}</div>
+        <div className="">{champion?.title}</div>
+        <div className="text-center p-10 bg-cold-gray rounded-md my-2 w-1/2 h-30 ">
+          {champion?.lore}
         </div>
       </div>
     </div>
