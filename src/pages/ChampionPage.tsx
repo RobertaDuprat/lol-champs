@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
-import { API_BASE, CHAMPION_API_URL } from "../constants";
+import { API_BASE, CHAMPION_API_URL, API_ITEMS } from "../constants";
+import Items from "../resources/Items";
 
 type Props = {};
 type Champion = {
@@ -20,7 +21,6 @@ export default function ChampionPage({}: Props) {
   const [champion, setChampion] = useState<Champion | undefined>();
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -75,6 +75,12 @@ export default function ChampionPage({}: Props) {
         <div className="text-center p-10 bg-cold-gray rounded-md my-2 w-1/2 h-30 ">
           {champion?.lore}
         </div>
+        <ul>
+          {champion?.skins.map((skin) => (
+            <li key={skin.id}>{skin.name}</li>           
+          ))}
+        </ul>
+        <div><Items /></div>
       </div>
     </div>
   );
