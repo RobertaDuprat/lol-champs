@@ -10,14 +10,9 @@ interface Item {
 export default function Items() {
   const [itemsMap, setItemsMap] = useState<{ [key: string]: Item }>({});
   const [filterText, setFilterText] = useState("");
-  const [filterTags, setFilterTags] = useState("");
 
   const handleFilterTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFilterText(event.target.value);
-  };
-
-  const handleFilterTagsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFilterTags(event.target.value);
   };
 
   useEffect(() => {
@@ -34,32 +29,36 @@ export default function Items() {
   }, []);
 
   const itemsArray = Object.keys(itemsMap).map((key) => {
-    return ({
+    return {
       ...itemsMap[key], // spread operator
       id: key,
-    })
+    };
   }); // incluir id no objeto
   const filteredItems = itemsArray.filter((items) => {
-    const textMatch = items.name.toLowerCase().includes(filterText.toLowerCase());
-    const tagMatch = filterTags === "" || items.tags.includes(filterTags);
+    const textMatch = items.name
+      .toLowerCase()
+      .includes(filterText.toLowerCase());
 
-    return textMatch && tagMatch;
+    return textMatch;
   });
 
   return (
     <>
-    
-       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-12 gap-1 justify-items-center">
-        {/* <div className="grid grid-flow-col auto-cols-max gap-1 justify-items-center"> */}
-          {filteredItems.map((item) => {
-            console.log('item', item);
-            return (
-            // <Items key={items.name}/>
-            <ItemComponent item={item} />
-            // TODO: Criar outro componente para um Item (singular)
-          )})}
+      <div className="bg-hextec-black min-h-screen">
+        <input
+          placeholder="Digite aqui"
+          type="text"
+          onChange={handleFilterTextChange}
+          value={filterText}
+          className="border-2 border-cold-gray bg-cold-gray p-3 mt-8 ms-8 w-3/6"
+        />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-12 gap-1 justify-items-center">
+        {filteredItems.map((item) => {
+          console.log("item", item);
+          return <ItemComponent item={item} />;
+        })}
         </div>
-     
+      </div>
     </>
   );
 }

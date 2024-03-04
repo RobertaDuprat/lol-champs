@@ -3,6 +3,7 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import { API_BASE, CHAMPION_API_URL, API_ITEMS } from "../constants";
 import Items from "../resources/Items";
 
+
 type Props = {};
 type Champion = {
   title: string;
@@ -76,11 +77,22 @@ export default function ChampionPage({}: Props) {
           {champion?.lore}
         </div>
         <ul>
+          
           {champion?.skins.map((skin) => (
-            <li key={skin.id}>{skin.name}</li>           
+            <div key={skin.id}>
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championId}_${skin.num}.jpg`}
+                alt={skin.name}
+              />
+              <p>{skin.name}</p>
+            </div>
           ))}
+       
+
         </ul>
-        <div><Items /></div>
+        <div >
+          <Items />
+        </div>
       </div>
     </div>
   );
